@@ -57,6 +57,10 @@ body {
   cursor: none;
 }
 
+body.no-custom-cursor{cursor:auto;}
+body.no-custom-cursor .cur,
+body.no-custom-cursor .cur-ring{display:none !important;}
+
 /* CURSOR */
 .cur {
   width:10px;height:10px;background:var(--cursor);
@@ -86,6 +90,11 @@ body {
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   *{animation:none !important; transition:none !important;}
+  .cur,.cur-ring{display:none !important;}
+}
+
+@media (hover: none), (pointer: coarse){
+  body{cursor:auto;}
   .cur,.cur-ring{display:none !important;}
 }
 
@@ -823,6 +832,20 @@ footer{
 .page.active .hero-stats{animation-delay:0.32s}
 
 /* RESPONSIVE */
+/* Services page layout helpers */
+.services-stack-row{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  background:var(--card);
+  padding:48px;
+}
+.services-price-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+
 @media(max-width:1024px){
   nav{padding:0 24px;}
   .nav-links{display:none;}
@@ -834,8 +857,15 @@ footer{
   .testimonials-grid{grid-template-columns:1fr;}
   .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
   .hero-stats{gap:32px;}
+  .services-stack-row{grid-template-columns:1fr;padding:32px;}
+  .services-price-grid{grid-template-columns:1fr 1fr;}
+  .feature-split.reverse .feature-content,
+  .feature-split.reverse .feature-visual{padding:0 !important;margin:0 !important;}
 }
 @media(max-width:640px){
+  nav{height:60px;padding:0 16px;}
+  .nav-logo{font-size:16px;}
+  .nav-cta{padding:8px 14px;font-size:12px;}
   .hero{padding:120px 20px 60px;}
   .section{padding:60px 20px;}
   .services-grid,.pricing-grid,.industries-grid,.process-steps{grid-template-columns:1fr;}
@@ -848,6 +878,15 @@ footer{
   .hero-stats{flex-wrap:wrap;gap:24px;}
   .cta-actions{flex-direction:column;align-items:center;}
   .contact-wrap{padding:120px 20px 60px;}
+  .hero-title{font-size:clamp(40px,11vw,60px);}
+  .hero-sub{font-size:16px;line-height:1.6;}
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost,
+  .cta-actions .btn-primary,
+  .cta-actions .btn-ghost{width:100%;justify-content:center;}
+  .services-stack-row{padding:24px;}
+  .services-price-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 
 /* ICON REMOVAL (hide emoji/icon blocks and arrow spans) */
@@ -1249,13 +1288,13 @@ footer{
 
     <div style="display:flex;flex-direction:column;gap:2px;background:var(--border);border-radius:20px;overflow:hidden">
 
-      <div style="display:grid;grid-template-columns:1fr 2fr;background:var(--card);padding:48px">
+      <div class="services-stack-row">
         <div>
           <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px">Business Intelligence & Data Analytics</h2>
         </div>
         <div>
           <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">We build Power BI dashboards, KPI frameworks, and financial analytics that give leadership teams instant clarity on performance, profitability, and growth opportunity.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+          <div class="services-price-grid">
             <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:16px">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px">SME PRICING</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700">KES 40K – 180K</div>
@@ -1271,13 +1310,13 @@ footer{
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 2fr;background:var(--card);padding:48px">
+      <div class="services-stack-row">
         <div>
           <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px">Marketing Automation & CRM</h2>
         </div>
         <div>
           <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">We set up and configure your CRM, build automated email sequences, implement lead scoring, and orchestrate multi-channel campaigns — so your pipeline runs on autopilot.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+          <div class="services-price-grid">
             <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:16px">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px">SME PRICING</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700">KES 45K – 120K</div>
@@ -1293,13 +1332,13 @@ footer{
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 2fr;background:var(--card);padding:48px">
+      <div class="services-stack-row">
         <div>
           <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px">Executive Presentations & Reporting</h2>
         </div>
         <div>
           <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">World-class investor pitch decks, board strategy reports, and business proposals. We combine data analysis with executive storytelling — because numbers alone don't close deals.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+          <div class="services-price-grid">
             <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:16px">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px">SME PRICING</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700">KES 30K – 70K</div>
@@ -1315,13 +1354,13 @@ footer{
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 2fr;background:var(--card);padding:48px">
+      <div class="services-stack-row">
         <div>
           <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px">Market & Competitor Research</h2>
         </div>
         <div>
           <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">Deep-dive market analysis, competitor benchmarking, and consumer intelligence reports. Know your landscape, understand your customers, and find the gaps your competitors are missing.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+          <div class="services-price-grid">
             <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:16px">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px">SME PRICING</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700">KES 50K – 150K</div>
@@ -1337,13 +1376,13 @@ footer{
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 2fr;background:var(--card);padding:48px">
+      <div class="services-stack-row">
         <div>
           <h2 style="font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px">B2B Analytics Outsourcing</h2>
         </div>
         <div>
           <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">We serve as the technical analytics partner for marketing agencies and digital firms. Outsource your data-heavy work to us on a white-label basis — fast turnaround, enterprise-grade quality.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+          <div class="services-price-grid">
             <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:16px">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px">RETAINER — BASIC</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700">KES 45K/mo</div>
@@ -1496,9 +1535,14 @@ footer{
 // Cursor
 const cur = document.getElementById('cur');
 const curRing = document.getElementById('curRing');
+const disableCustomCursor = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+if (disableCustomCursor) {
+  document.body.classList.add('no-custom-cursor');
+}
 let mouseX = 0, mouseY = 0;
 let rafPending = false;
 document.addEventListener('mousemove', (e) => {
+  if (disableCustomCursor) return;
   mouseX = e.clientX;
   mouseY = e.clientY;
   if (rafPending) return;
@@ -1514,11 +1558,13 @@ document.addEventListener('mousemove', (e) => {
 
 const hoverTargets = ['a', 'button', '[role="button"]'];
 document.addEventListener('pointerover', (e) => {
+  if (disableCustomCursor) return;
   if (e.target && e.target.closest && e.target.closest(hoverTargets.join(','))) {
     document.body.classList.add('cursor-hover');
   }
 }, { passive: true });
 document.addEventListener('pointerout', (e) => {
+  if (disableCustomCursor) return;
   if (e.target && e.target.closest && e.target.closest(hoverTargets.join(','))) {
     document.body.classList.remove('cursor-hover');
   }
